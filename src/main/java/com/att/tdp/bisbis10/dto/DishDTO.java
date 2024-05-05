@@ -1,9 +1,9 @@
 package com.att.tdp.bisbis10.dto;
 
 import com.att.tdp.bisbis10.entitys.Dish;
-import jakarta.annotation.Nonnull;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 public class DishDTO {
 
@@ -12,10 +12,10 @@ public class DishDTO {
     private final String name;
     @NotNull
     private final String description;
-    @NotNull
-    private final double price;
+    @Positive(message = "Price must be positive")
+    private final Integer price;
 
-    public DishDTO(Long id, String name, String description, double price) {
+    public DishDTO(Long id, String name, String description, Integer price) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -37,7 +37,11 @@ public class DishDTO {
         return description;
     }
 
-    public double getPrice() {
+    public Integer getPrice() {
         return price;
+    }
+
+    public long getId() {
+        return id;
     }
 }

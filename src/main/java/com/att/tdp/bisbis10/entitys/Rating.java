@@ -2,6 +2,8 @@ package com.att.tdp.bisbis10.entitys;
 
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 
 @Entity(name = "rating")
 @Table(name = "rating")
@@ -39,4 +41,5 @@ public class Rating {
     public double getRate() {
         return rate;
     }
+
 }

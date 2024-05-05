@@ -3,7 +3,8 @@ package com.att.tdp.bisbis10.entitys;
 public enum Cuisine {
     Asian("Asian"),
     Mexican("Mexican"),
-    Indian("Indian");
+    Indian("Indian"),
+    Other("Other");
 
     private final String name;
 

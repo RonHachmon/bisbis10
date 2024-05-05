@@ -19,6 +19,7 @@ public class DishOrder {
 
     @Column(name = "quantity", nullable = false)
     private int quantity;
+
     @ManyToOne
     private Dish dish;
 

@@ -20,8 +20,8 @@ public class RatingController {
     }
 
     @PostMapping()
-    public ResponseEntity<Void> addDish(@RequestBody @Valid RatingDTO ratingDTO) {
+    public ResponseEntity<Void> addRating(@RequestBody @Valid RatingDTO ratingDTO) {
         ratingService.addRating(ratingDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.ok().build();
     }
 }

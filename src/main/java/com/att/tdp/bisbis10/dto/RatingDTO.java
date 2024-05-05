@@ -7,11 +7,11 @@ import jakarta.validation.constraints.NotNull;
 public class RatingDTO {
 
     @NotNull(message = "restaurantid field is required")
-    private final long restaurantId;
+    private final Long restaurantId;
     @NotNull(message = "rating field is required")
     @Min(1)
     @Max(5)
-    private final double rating;
+    private final Double rating;
 
 
     public RatingDTO(double rating, long restaurantId) {

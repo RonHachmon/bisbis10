@@ -1,4 +1,4 @@
-package com.att.tdp.bisbis10;
+package com.att.tdp.bisbis10.configuration;
 
 
 import com.att.tdp.bisbis10.entitys.Cuisine;
