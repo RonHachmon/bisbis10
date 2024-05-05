@@ -44,8 +44,8 @@ public class RestaurantController {
 
     @GetMapping("/{id}")
     public ResponseEntity<RestaurantWithDishDTO> getRestaurantById(@PathVariable Long id) {
-        RestaurantWithDishDTO restaurantWithDishDTO = restaurantService.getRestaurantById(id);
-        return new ResponseEntity<>(restaurantWithDishDTO, HttpStatus.OK);
+        RestaurantWithDishDTO restaurantWithDishDTO = restaurantService.getRestaurantWithDishes(id);
+        return ResponseEntity.ok(restaurantWithDishDTO);
 
     }
 
@@ -53,7 +53,7 @@ public class RestaurantController {
     @ResponseStatus(HttpStatus.CREATED)
     ResponseEntity<Void> createRestaurant(@RequestBody @Valid RestaurantDTO restaurant) {
         restaurantService.createRestaurant(restaurant);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PutMapping("/{id}")

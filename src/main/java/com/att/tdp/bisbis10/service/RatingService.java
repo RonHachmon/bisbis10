@@ -20,12 +20,16 @@ public class RatingService {
     }
 
     public void addRating(RatingDTO ratingDTO) {
-        Restaurant restaurant = restaurantService.getRestaurantIfExist(ratingDTO.getRestaurantID());
+        Restaurant restaurant = restaurantService.getRestaurantById(ratingDTO.getRestaurantID());
         Rating rating = new Rating(ratingDTO.getRate(), restaurant);
-        restaurant.addToTotalRate(rating.getRate());
-        restaurant.increaseNumberOfRates(1);
+        updateRestaurantRating(restaurant, rating);
         ratingRepository.save(rating);
         restaurantService.saveRestaurant(restaurant);
+    }
+
+    private  void updateRestaurantRating(Restaurant restaurant, Rating rating) {
+        restaurant.addToTotalRate(rating.getRate());
+        restaurant.increaseNumberOfRates(1);
     }
 
 

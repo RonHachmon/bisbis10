@@ -1,6 +1,8 @@
 package com.att.tdp.bisbis10.dto;
 
 
+import jakarta.validation.constraints.Positive;
+
 public class DishUpdateDTO {
 
 
@@ -9,9 +11,10 @@ public class DishUpdateDTO {
     private final String description;
 
 
-    private final Double price;
+    @Positive(message = "Price must be positive")
+    private final Integer price;
 
-    public DishUpdateDTO(String name, String description, Double price) {
+    public DishUpdateDTO(String name, String description, Integer price) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -25,7 +28,7 @@ public class DishUpdateDTO {
         return description;
     }
 
-    public Double getPrice() {
+    public Integer getPrice() {
         return price;
     }
 }

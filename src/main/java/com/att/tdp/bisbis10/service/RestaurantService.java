@@ -7,6 +7,7 @@ import com.att.tdp.bisbis10.dto.RestaurantWithDishDTO;
 import com.att.tdp.bisbis10.entitys.Cuisine;
 import com.att.tdp.bisbis10.entitys.Restaurant;
 import com.att.tdp.bisbis10.repository.RestaurantRepository;
+import com.att.tdp.bisbis10.utils.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,10 +35,8 @@ public class RestaurantService {
         return restaurantRepository.findByCuisinesIn(cuisineSet);
     }
 
-    public RestaurantWithDishDTO getRestaurantById(long id) {
-        Restaurant restaurant = getRestaurantIfExist(id);
-
-
+    public RestaurantWithDishDTO getRestaurantWithDishes(long id) {
+        Restaurant restaurant = getRestaurantById(id);
         return new RestaurantWithDishDTO(restaurant);
     }
 
@@ -51,7 +50,7 @@ public class RestaurantService {
     }
 
     public Restaurant updateRestaurant(long id, RestaurantUpdateDTO restaurantUpdateDTO) {
-        Restaurant restaurant = getRestaurantIfExist(id);
+        Restaurant restaurant = getRestaurantById(id);
         updateRestaurant(restaurant, restaurantUpdateDTO);
 
         return restaurantRepository.save(restaurant);
@@ -61,18 +60,18 @@ public class RestaurantService {
         if (restaurantUpdateDTO.getKosher() != null) {
             restaurant.setKosher(restaurantUpdateDTO.getKosher());
         }
-        if (restaurantUpdateDTO.getName() != null) {
+        if (Validation.isNameValid(restaurantUpdateDTO.getName())) {
             restaurant.setName(restaurantUpdateDTO.getName());
         }
         updateCuisine(restaurant, restaurantUpdateDTO);
     }
 
     public void deleteRestaurant(long id) {
-        getRestaurantIfExist(id);
+        getRestaurantById(id);
         restaurantRepository.deleteById(id);
     }
 
-    public Restaurant getRestaurantIfExist(long id) {
+    public Restaurant getRestaurantById(long id) {
         return restaurantRepository.findById(id).orElseThrow(() -> new ResourceIDNotFoundException("Restaurant", id));
     }
 

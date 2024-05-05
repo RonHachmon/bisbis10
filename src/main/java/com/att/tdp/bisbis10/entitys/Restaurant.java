@@ -109,6 +109,10 @@ public class Restaurant {
     }
 
     public void addToTotalRate(Double totalRate) {
+        if(totalRate == null)
+        {
+            this.totalRate= 0.0;
+        }
         this.totalRate += totalRate;
     }
 
@@ -117,6 +121,10 @@ public class Restaurant {
     }
 
     public void increaseNumberOfRates(Integer numberOfRates) {
+        if(this.numberOfRates == null)
+        {
+            this.numberOfRates= 0;
+        }
         this.numberOfRates += numberOfRates;
     }
 }

@@ -2,7 +2,6 @@ package com.att.tdp.bisbis10.controller;
 
 import com.att.tdp.bisbis10.dto.OrderDTO;
 import com.att.tdp.bisbis10.dto.OrderIdDTO;
-import com.att.tdp.bisbis10.dto.RatingDTO;
 import com.att.tdp.bisbis10.service.OrderService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

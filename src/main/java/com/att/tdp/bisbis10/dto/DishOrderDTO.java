@@ -1,14 +1,14 @@
 package com.att.tdp.bisbis10.dto;
 
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 public class DishOrderDTO {
-    @NotNull
-    private final long dishId;
-    @NotNull
-    @Min(1)
-    private final int amount;
+    @NotNull(message = "dishId field is required")
+    private final Long dishId;
+    @NotNull(message = "dishId field is required")
+    @Positive(message = "amount must be positive")
+    private final Integer amount;
 
     public DishOrderDTO(long dishId, int amount) {
         this.dishId = dishId;

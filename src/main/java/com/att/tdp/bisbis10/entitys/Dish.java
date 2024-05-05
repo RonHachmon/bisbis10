@@ -4,6 +4,8 @@ package com.att.tdp.bisbis10.entitys;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.Objects;
+
 @Entity(name = "dish")
 @Table(name = "dish")
 public class Dish {
@@ -18,13 +20,13 @@ public class Dish {
     @Column(name = "dish_description", length = 200)
     private String description;
     @Column(name = "dish_price", nullable = false)
-    private double price;
+    private Integer price;
     @ManyToOne
     @JsonIgnore
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
-    public Dish(String name, String description, double price, Restaurant restaurant) {
+    public Dish(String name, String description, Integer price, Restaurant restaurant) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -50,15 +52,16 @@ public class Dish {
         this.description = description;
     }
 
-    public double getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
     public Long getId() {
         return id;
     }
+
 }

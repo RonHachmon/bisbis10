@@ -6,13 +6,10 @@ import com.att.tdp.bisbis10.dto.OrderIdDTO;
 import com.att.tdp.bisbis10.entitys.Dish;
 import com.att.tdp.bisbis10.entitys.DishOrder;
 import com.att.tdp.bisbis10.entitys.Order;
-import com.att.tdp.bisbis10.entitys.Restaurant;
 import com.att.tdp.bisbis10.repository.DishOrderRepository;
 import com.att.tdp.bisbis10.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 public class OrderService {
@@ -31,17 +28,24 @@ public class OrderService {
 
     public OrderIdDTO createOrder(OrderDTO orderDTO)
     {
-        Restaurant restaurant = restaurantService.getRestaurantIfExist(orderDTO.getRestaurantId());
+        validateAllDishesBelongToRestaurant(orderDTO);
+
         Order order = new Order();
-        order.setRestaurant(restaurant);
+        order.setRestaurant(restaurantService.getRestaurantById(orderDTO.getRestaurantId()));
         orderRepository.save(order);
         addDishes(order, orderDTO.getOrderItems());
         return new OrderIdDTO(order.getId());
     }
 
+    private void validateAllDishesBelongToRestaurant(OrderDTO orderDTO) {
+        for (DishOrderDTO dishOrderDTO : orderDTO.getOrderItems()) {
+            dishService.validateDishBelongToRestaurant(orderDTO.getRestaurantId(),dishOrderDTO.getDishId());
+        }
+    }
+
     private void addDishes(Order order, DishOrderDTO[] orderItems) {
         for (DishOrderDTO dishOrderDTO : orderItems) {
-            Dish dish= dishService.getDishIfExist(dishOrderDTO.getDishId());
+            Dish dish= dishService.getDishById(dishOrderDTO.getDishId());
             DishOrder dishOrder=new DishOrder(dishOrderDTO.getAmount(),dish,order);
             dishOrderRepository.save(dishOrder);
             order.addDishOrder(dishOrder);

@@ -40,7 +40,8 @@ public class DishController {
     }
 
     @PutMapping("/{dishID}")
-    public ResponseEntity<List<Dish>> updateDish(@PathVariable Long restaurantID, @PathVariable Long dishID, @RequestBody DishUpdateDTO dishUpdateDTO) {
+    public ResponseEntity<List<Dish>> updateDish(@PathVariable Long restaurantID, @PathVariable Long dishID,
+                                                 @RequestBody @Valid DishUpdateDTO dishUpdateDTO) {
         dishService.updateDish(restaurantID, dishID, dishUpdateDTO);
         return ResponseEntity.ok().build();
     }
