@@ -5,8 +5,8 @@ spring:
   application:
     name: temporal-demo
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
+    url: jdbc:postgresql://localhost:5432/bisbis10
+    username: bisbis10
     password: bisbis10
     driverClassName: org.postgresql.Driver
     platform: postgres
