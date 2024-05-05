@@ -21,7 +21,7 @@ public class RatingService {
 
     public void addRating(RatingDTO ratingDTO) {
         Restaurant restaurant = restaurantService.getRestaurantIfExist(ratingDTO.getRestaurantID());
-        Rating rating=new Rating(ratingDTO.getRate(),restaurant);
+        Rating rating = new Rating(ratingDTO.getRate(), restaurant);
         restaurant.addToTotalRate(rating.getRate());
         restaurant.increaseNumberOfRates(1);
         ratingRepository.save(rating);

@@ -1,7 +1,6 @@
 package com.att.tdp.bisbis10.controller;
 
 
-
 import com.att.tdp.bisbis10.dto.RatingDTO;
 import com.att.tdp.bisbis10.service.RatingService;
 import jakarta.validation.Valid;
@@ -14,12 +13,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/ratings")
 public class RatingController {
     private final RatingService ratingService;
+
     @Autowired
     RatingController(RatingService ratingService) {
         this.ratingService = ratingService;
     }
+
     @PostMapping()
-    public ResponseEntity<Void> addDish(@RequestBody @Valid RatingDTO ratingDTO ) {
+    public ResponseEntity<Void> addDish(@RequestBody @Valid RatingDTO ratingDTO) {
         ratingService.addRating(ratingDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

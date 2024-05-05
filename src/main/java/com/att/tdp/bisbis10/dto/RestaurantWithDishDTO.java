@@ -32,6 +32,7 @@ public class RestaurantWithDishDTO {
         this.cuisines = cuisines;
         this.dishes = dishes;
     }
+
     public RestaurantWithDishDTO(Restaurant restaurant) {
         this.id = restaurant.getId();
         this.name = restaurant.getName();
@@ -48,7 +49,7 @@ public class RestaurantWithDishDTO {
     private void addDishes(Set<Dish> dishes) {
         int i = 0;
         for (Dish dish : dishes) {
-            this.dishes[i++] = new DishDTO( dish);
+            this.dishes[i++] = new DishDTO(dish);
         }
 
     }

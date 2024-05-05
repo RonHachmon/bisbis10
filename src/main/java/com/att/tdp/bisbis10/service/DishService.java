@@ -18,7 +18,6 @@ public class DishService {
     private final RestaurantService restaurantService;
 
 
-
     @Autowired
     public DishService(DishRepository dishRepository, RestaurantService restaurantService) {
         this.dishRepository = dishRepository;
@@ -28,14 +27,13 @@ public class DishService {
 
     public void addDish(Long restaurantId, DishDTO dishDTO) {
         Restaurant restaurant = restaurantService.getRestaurantIfExist(restaurantId);
-        Dish dish=new Dish(dishDTO.getName(),dishDTO.getDescription(),dishDTO.getPrice(),restaurant);
+        Dish dish = new Dish(dishDTO.getName(), dishDTO.getDescription(), dishDTO.getPrice(), restaurant);
         dishRepository.save(dish);
     }
 
     public List<Dish> getRestaurantDishes(Long restaurantID) {
         restaurantService.getRestaurantIfExist(restaurantID);
-        List<Dish> restaurantDishes = dishRepository.findByRestaurantId(restaurantID);
-        return restaurantDishes;
+        return dishRepository.findByRestaurantId(restaurantID);
 
     }
 
@@ -45,8 +43,8 @@ public class DishService {
         dishRepository.deleteById(dishID);
     }
 
-    private Dish getDishIfExist( Long dishID) {
-         return dishRepository.findById(dishID).orElseThrow(() -> new ResourceIDNotFoundException("Dish",  dishID ));
+    private Dish getDishIfExist(Long dishID) {
+        return dishRepository.findById(dishID).orElseThrow(() -> new ResourceIDNotFoundException("Dish", dishID));
     }
 
     public void updateDish(Long restaurantID, Long dishID, DishUpdateDTO dishUpdateDTO) {
@@ -54,20 +52,19 @@ public class DishService {
 
         restaurantService.getRestaurantIfExist(restaurantID);
         Dish dish = getDishIfExist(dishID);
-        updateDish(dish,dishUpdateDTO);
+        updateDish(dish, dishUpdateDTO);
         dishRepository.save(dish);
 
     }
 
-    private void updateDish(Dish dish,DishUpdateDTO dishUpdateDTO) {
-        if (dishUpdateDTO.getDescription()!=null)
-        {
+    private void updateDish(Dish dish, DishUpdateDTO dishUpdateDTO) {
+        if (dishUpdateDTO.getDescription() != null) {
             dish.setDescription(dishUpdateDTO.getDescription());
         }
-        if (dishUpdateDTO.getName()!=null) {
+        if (dishUpdateDTO.getName() != null) {
             dish.setName(dishUpdateDTO.getName());
         }
-        if (dishUpdateDTO.getPrice()!=null) {
+        if (dishUpdateDTO.getPrice() != null) {
             dish.setPrice(dishUpdateDTO.getPrice());
         }
     }

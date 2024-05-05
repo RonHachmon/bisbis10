@@ -6,12 +6,9 @@ import com.att.tdp.bisbis10.dto.RestaurantUpdateDTO;
 import com.att.tdp.bisbis10.dto.RestaurantWithDishDTO;
 import com.att.tdp.bisbis10.entitys.Restaurant;
 import com.att.tdp.bisbis10.service.RestaurantService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 
@@ -22,11 +19,9 @@ import java.util.List;
 import java.util.Optional;
 
 
-
 @RestController
 @RequestMapping("/restaurants")
 public class RestaurantController {
-    //private final RestaurantRepository restaurantRepository;
     private final RestaurantService restaurantService;
 
 
@@ -36,7 +31,7 @@ public class RestaurantController {
     }
 
     @GetMapping()
-    ResponseEntity<List<Restaurant>> getRestaurants( @RequestParam Optional<String> cuisine) {
+    ResponseEntity<List<Restaurant>> getRestaurants(@RequestParam Optional<String> cuisine) {
         // Filter restaurants based on cuisine if present, otherwise return all restaurants
         List<Restaurant> restaurants;
         if (cuisine.isPresent()) {
@@ -56,22 +51,20 @@ public class RestaurantController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    ResponseEntity<Void> createRestaurant(@RequestBody @Valid RestaurantDTO restaurant)
-    {
+    ResponseEntity<Void> createRestaurant(@RequestBody @Valid RestaurantDTO restaurant) {
         restaurantService.createRestaurant(restaurant);
-         return ResponseEntity.ok().build();
+        return ResponseEntity.ok().build();
     }
+
     @PutMapping("/{id}")
-    ResponseEntity<Void> updateRestaurant(@PathVariable Long id, @RequestBody RestaurantUpdateDTO restaurantUpdateDTO)
-    {
-        restaurantService.updateRestaurant(id,restaurantUpdateDTO);
+    ResponseEntity<Void> updateRestaurant(@PathVariable Long id, @RequestBody RestaurantUpdateDTO restaurantUpdateDTO) {
+        restaurantService.updateRestaurant(id, restaurantUpdateDTO);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    ResponseEntity<Void> deleteRestaurant( @PathVariable Long id)
-    {
+    ResponseEntity<Void> deleteRestaurant(@PathVariable Long id) {
         restaurantService.deleteRestaurant(id);
         return ResponseEntity.noContent().build();
     }

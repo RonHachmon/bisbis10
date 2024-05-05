@@ -1,9 +1,7 @@
 package com.att.tdp.bisbis10.dto;
 
-import jakarta.annotation.Nonnull;
 
 public class DishUpdateDTO {
-
 
 
     private final String name;

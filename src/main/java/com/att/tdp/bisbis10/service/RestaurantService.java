@@ -35,10 +35,10 @@ public class RestaurantService {
     }
 
     public RestaurantWithDishDTO getRestaurantById(long id) {
-        Restaurant restaurant =getRestaurantIfExist(id);
+        Restaurant restaurant = getRestaurantIfExist(id);
 
 
-       return  new  RestaurantWithDishDTO(restaurant);
+        return new RestaurantWithDishDTO(restaurant);
     }
 
     public Restaurant createRestaurant(RestaurantDTO restaurantDTO) {
@@ -51,12 +51,13 @@ public class RestaurantService {
     }
 
     public Restaurant updateRestaurant(long id, RestaurantUpdateDTO restaurantUpdateDTO) {
-        Restaurant restaurant =getRestaurantIfExist(id);
+        Restaurant restaurant = getRestaurantIfExist(id);
         updateRestaurant(restaurant, restaurantUpdateDTO);
 
         return restaurantRepository.save(restaurant);
     }
-    private  void  updateRestaurant(Restaurant restaurant, RestaurantUpdateDTO restaurantUpdateDTO) {
+
+    private void updateRestaurant(Restaurant restaurant, RestaurantUpdateDTO restaurantUpdateDTO) {
         if (restaurantUpdateDTO.getKosher() != null) {
             restaurant.setKosher(restaurantUpdateDTO.getKosher());
         }
@@ -72,27 +73,28 @@ public class RestaurantService {
     }
 
     public Restaurant getRestaurantIfExist(long id) {
-        return restaurantRepository.findById(id).orElseThrow(() ->  new ResourceIDNotFoundException("Restaurant", id));
+        return restaurantRepository.findById(id).orElseThrow(() -> new ResourceIDNotFoundException("Restaurant", id));
     }
+
     public void saveRestaurant(Restaurant restaurant) {
         restaurantRepository.save(restaurant);
     }
 
 
-    private  void updateCuisine(Restaurant restaurant, RestaurantUpdateDTO restaurantUpdateDTO) {
+    private void updateCuisine(Restaurant restaurant, RestaurantUpdateDTO restaurantUpdateDTO) {
         Set<Cuisine> newCuisineSet = new HashSet<>(restaurant.getCuisines());
-        if ( restaurantUpdateDTO.getDeleteCuisines() != null ) {
+        if (restaurantUpdateDTO.getDeleteCuisines() != null) {
             newCuisineSet.removeIf(cuisine -> cuisineExistInList(cuisine, restaurantUpdateDTO.getDeleteCuisines()));
         }
-        if(restaurantUpdateDTO.getNewCuisines() != null) {
-            for(String newCuisine : restaurantUpdateDTO.getNewCuisines())
-            {
+        if (restaurantUpdateDTO.getNewCuisines() != null) {
+            for (String newCuisine : restaurantUpdateDTO.getNewCuisines()) {
                 newCuisineSet.add(Cuisine.getCuisineByString(newCuisine));
             }
         }
         restaurant.setCuisines(newCuisineSet);
     }
-    private  boolean cuisineExistInList(Cuisine cuisine, String[] cuisines) {
+
+    private boolean cuisineExistInList(Cuisine cuisine, String[] cuisines) {
         for (String cuisineString : cuisines) {
             if (cuisine.name().equalsIgnoreCase(cuisineString)) {
                 return true;

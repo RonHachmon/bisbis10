@@ -20,6 +20,7 @@ public class DishDTO {
         this.description = description;
         this.price = price;
     }
+
     public DishDTO(Dish dish) {
         this.id = dish.getId();
         this.name = dish.getName();

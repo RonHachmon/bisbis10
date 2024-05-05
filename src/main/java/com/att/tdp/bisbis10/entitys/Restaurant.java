@@ -37,7 +37,6 @@ public class Restaurant {
     private Double averageRating;
 
 
-
     @JsonIgnore
     @Column(name = "total_rate", nullable = false)
     private Double totalRate;
@@ -55,8 +54,8 @@ public class Restaurant {
         this.name = name;
         this.isKosher = isKosher;
         this.cuisines = cuisines;
-        numberOfRates=0;
-        totalRate=0.0;
+        numberOfRates = 0;
+        totalRate = 0.0;
     }
 
 
@@ -101,8 +100,8 @@ public class Restaurant {
         if (this.numberOfRates == 0) {
             return null;
         }
-        double avg=this.totalRate /this.numberOfRates;
-        return Double.parseDouble(String.format("%.2f",avg));
+        double avg = this.totalRate / this.numberOfRates;
+        return Double.parseDouble(String.format("%.2f", avg));
 
 //        if(ratings.isEmpty())
 //        {

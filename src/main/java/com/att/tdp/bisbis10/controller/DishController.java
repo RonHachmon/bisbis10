@@ -4,7 +4,6 @@ package com.att.tdp.bisbis10.controller;
 import com.att.tdp.bisbis10.dto.DishDTO;
 import com.att.tdp.bisbis10.dto.DishUpdateDTO;
 import com.att.tdp.bisbis10.entitys.Dish;
-import com.att.tdp.bisbis10.repository.DishRepository;
 import com.att.tdp.bisbis10.service.DishService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,22 +26,25 @@ public class DishController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Void> addDish(@PathVariable Long restaurantID,@RequestBody @Valid DishDTO dishDTO ) {
+    public ResponseEntity<Void> addDish(@PathVariable Long restaurantID, @RequestBody @Valid DishDTO dishDTO) {
         dishService.addDish(restaurantID, dishDTO);
+        
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
+
     @DeleteMapping("/{dishID}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public ResponseEntity<List<Dish>> deleteDish(@PathVariable Long restaurantID,@PathVariable Long dishID) {
-        dishService.deleteDish(restaurantID,dishID);
+    public ResponseEntity<List<Dish>> deleteDish(@PathVariable Long restaurantID, @PathVariable Long dishID) {
+        dishService.deleteDish(restaurantID, dishID);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{dishID}")
-    public ResponseEntity<List<Dish>> updateDish(@PathVariable Long restaurantID,@PathVariable Long dishID,@RequestBody  DishUpdateDTO dishUpdateDTO) {
-        dishService.updateDish(restaurantID, dishID,dishUpdateDTO);
+    public ResponseEntity<List<Dish>> updateDish(@PathVariable Long restaurantID, @PathVariable Long dishID, @RequestBody DishUpdateDTO dishUpdateDTO) {
+        dishService.updateDish(restaurantID, dishID, dishUpdateDTO);
         return ResponseEntity.ok().build();
     }
+
     @GetMapping()
     public ResponseEntity<List<Dish>> getDishesByRestaurantID(@PathVariable Long restaurantID) {
 

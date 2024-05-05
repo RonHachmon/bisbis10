@@ -9,7 +9,7 @@ public class Rating {
     @Id
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
-            )
+    )
     private Long id;
 
     @ManyToOne
@@ -17,10 +17,10 @@ public class Rating {
     private Restaurant restaurant;
 
 
-    @Column(name = "rate",nullable = false)
+    @Column(name = "rate", nullable = false)
     private double rate;
 
-    public Rating( double rate,Restaurant restaurant) {
+    public Rating(double rate, Restaurant restaurant) {
         this.restaurant = restaurant;
         this.rate = rate;
     }
