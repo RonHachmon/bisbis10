@@ -2,16 +2,17 @@ package com.att.tdp.bisbis10.dto;
 
 import com.att.tdp.bisbis10.entitys.Dish;
 import jakarta.annotation.Nonnull;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class DishDTO {
 
-    @Nonnull
     private final Long id;
-    @Nonnull
+    @NotBlank
     private final String name;
-    @Nonnull
+    @NotNull
     private final String description;
-    @Nonnull
+    @NotNull
     private final double price;
 
     public DishDTO(Long id, String name, String description, double price) {
