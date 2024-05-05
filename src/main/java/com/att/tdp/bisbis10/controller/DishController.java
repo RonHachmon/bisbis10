@@ -28,6 +28,7 @@ public class DishController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> addDish(@PathVariable Long restaurantID, @RequestBody @Valid DishDTO dishDTO) {
         dishService.addDish(restaurantID, dishDTO);
+        
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
