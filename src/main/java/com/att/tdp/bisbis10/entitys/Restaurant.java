@@ -102,17 +102,6 @@ public class Restaurant {
         }
         double avg = this.totalRate / this.numberOfRates;
         return Double.parseDouble(String.format("%.2f", avg));
-
-//        if(ratings.isEmpty())
-//        {
-//            return null;
-//        }
-//        double sum = 0;
-//        for (Rating rating : this.ratings) {
-//            sum += rating.getRate();
-//        }
-//        double avg=sum / ratings.size();
-//        return Double.parseDouble(String.format("%.2f",avg));
     }
 
     public Double getTotalRate() {

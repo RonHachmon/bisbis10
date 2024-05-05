@@ -43,7 +43,7 @@ public class DishService {
         dishRepository.deleteById(dishID);
     }
 
-    private Dish getDishIfExist(Long dishID) {
+    public Dish getDishIfExist(Long dishID) {
         return dishRepository.findById(dishID).orElseThrow(() -> new ResourceIDNotFoundException("Dish", dishID));
     }
 
